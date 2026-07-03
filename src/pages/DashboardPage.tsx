@@ -23,7 +23,8 @@ interface CardDef {
   label: string;
   field: keyof DashboardDto;
   icon: React.ReactNode;
-  color: string;
+  bgColor: string;
+  iconColor: string;
 }
 
 interface Section {
@@ -35,60 +36,79 @@ const sections: Section[] = [
   {
     title: 'Users',
     cards: [
-      { label: 'Total Users', field: 'totalUsers', icon: <PeopleIcon />, color: '#1976d2' },
-      { label: 'Admins', field: 'totalAdmins', icon: <AdminPanelSettingsIcon />, color: '#1565c0' },
-      { label: 'Clients', field: 'totalClients', icon: <PersonIcon />, color: '#42a5f5' },
+      { label: 'Total Users', field: 'totalUsers', icon: <PeopleIcon />, bgColor: 'rgba(49, 107, 243, 0.1)', iconColor: '#316bf3' },
+      { label: 'Admins', field: 'totalAdmins', icon: <AdminPanelSettingsIcon />, bgColor: 'rgba(49, 107, 243, 0.1)', iconColor: '#316bf3' },
+      { label: 'Clients', field: 'totalClients', icon: <PersonIcon />, bgColor: 'rgba(49, 107, 243, 0.1)', iconColor: '#316bf3' },
     ],
   },
   {
     title: 'Vehicles',
     cards: [
-      { label: 'Total Vehicles', field: 'totalVehicles', icon: <DirectionsCarIcon />, color: '#388e3c' },
-      { label: 'Idle', field: 'idleVehicles', icon: <CheckCircleOutlinedIcon />, color: '#2e7d32' },
-      { label: 'Busy', field: 'busyVehicles', icon: <DirectionsCarIcon />, color: '#e65100' },
-      { label: 'Unavailable', field: 'unavailableVehicles', icon: <BlockIcon />, color: '#c62828' },
+      { label: 'Total Vehicles', field: 'totalVehicles', icon: <DirectionsCarIcon />, bgColor: 'rgba(46, 125, 50, 0.1)', iconColor: '#2e7d32' },
+      { label: 'Idle', field: 'idleVehicles', icon: <CheckCircleOutlinedIcon />, bgColor: 'rgba(46, 125, 50, 0.1)', iconColor: '#2e7d32' },
+      { label: 'Busy', field: 'busyVehicles', icon: <DirectionsCarIcon />, bgColor: 'rgba(230, 81, 0, 0.1)', iconColor: '#e65100' },
+      { label: 'Unavailable', field: 'unavailableVehicles', icon: <BlockIcon />, bgColor: 'rgba(198, 40, 40, 0.1)', iconColor: '#c62828' },
     ],
   },
   {
     title: 'Trips',
     cards: [
-      { label: 'Total Trips', field: 'totalTrips', icon: <TripOriginIcon />, color: '#f57c00' },
-      { label: 'Pre-Trip', field: 'preTripTrips', icon: <DepartureBoardIcon />, color: '#ffa726' },
-      { label: 'Active Trips', field: 'activeTrips', icon: <TripOriginIcon />, color: '#e65100' },
-      { label: 'Completed', field: 'completedTrips', icon: <CheckCircleIcon />, color: '#2e7d32' },
-      { label: 'Cancelled', field: 'cancelledTrips', icon: <CancelIcon />, color: '#c62828' },
-      { label: 'Issues', field: 'issueTrips', icon: <WarningIcon />, color: '#6a1b9a' },
+      { label: 'Total Trips', field: 'totalTrips', icon: <TripOriginIcon />, bgColor: 'rgba(245, 124, 0, 0.1)', iconColor: '#f57c00' },
+      { label: 'Pre-Trip', field: 'preTripTrips', icon: <DepartureBoardIcon />, bgColor: 'rgba(255, 167, 38, 0.1)', iconColor: '#ffa726' },
+      { label: 'Active Trips', field: 'activeTrips', icon: <TripOriginIcon />, bgColor: 'rgba(230, 81, 0, 0.1)', iconColor: '#e65100' },
+      { label: 'Completed', field: 'completedTrips', icon: <CheckCircleIcon />, bgColor: 'rgba(46, 125, 50, 0.1)', iconColor: '#2e7d32' },
+      { label: 'Cancelled', field: 'cancelledTrips', icon: <CancelIcon />, bgColor: 'rgba(198, 40, 40, 0.1)', iconColor: '#c62828' },
+      { label: 'Issues', field: 'issueTrips', icon: <WarningIcon />, bgColor: 'rgba(106, 27, 154, 0.1)', iconColor: '#6a1b9a' },
     ],
   },
   {
     title: 'Requests',
     cards: [
-      { label: 'Pending', field: 'pendingRequests', icon: <HourglassEmptyIcon />, color: '#ffa726' },
-      { label: 'Accepted', field: 'acceptedRequests', icon: <ThumbUpIcon />, color: '#1976d2' },
-      { label: 'Completed', field: 'completedRequests', icon: <AssignmentTurnedInIcon />, color: '#2e7d32' },
-      { label: 'Failed', field: 'failedRequests', icon: <ErrorOutlinedIcon />, color: '#c62828' },
+      { label: 'Pending', field: 'pendingRequests', icon: <HourglassEmptyIcon />, bgColor: 'rgba(255, 167, 38, 0.1)', iconColor: '#ffa726' },
+      { label: 'Accepted', field: 'acceptedRequests', icon: <ThumbUpIcon />, bgColor: 'rgba(25, 118, 210, 0.1)', iconColor: '#1976d2' },
+      { label: 'Completed', field: 'completedRequests', icon: <AssignmentTurnedInIcon />, bgColor: 'rgba(46, 125, 50, 0.1)', iconColor: '#2e7d32' },
+      { label: 'Failed', field: 'failedRequests', icon: <ErrorOutlinedIcon />, bgColor: 'rgba(198, 40, 40, 0.1)', iconColor: '#c62828' },
     ],
   },
   {
     title: 'Revenue',
     cards: [
-      { label: 'Revenue (EGP)', field: 'totalRevenue', icon: <AttachMoneyIcon />, color: '#7b1fa2' },
+      { label: 'Revenue (EGP)', field: 'totalRevenue', icon: <AttachMoneyIcon />, bgColor: 'rgba(123, 31, 162, 0.1)', iconColor: '#7b1fa2' },
     ],
   },
 ];
 
 function KpiCard({ card, value }: { card: CardDef; value: number | string }) {
   return (
-    <Card>
-      <CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Box sx={{ color: card.color }}>{card.icon}</Box>
-          <Box>
-            <Typography variant="body2" color="text.secondary">
-              {card.label}
-            </Typography>
-            <Typography variant="h4">{value}</Typography>
-          </Box>
+    <Card
+      sx={{
+        transition: 'box-shadow 0.2s',
+        '&:hover': { boxShadow: '0 4px 12px 0 rgba(0,0,0,0.15)' },
+      }}
+    >
+      <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2, py: 2, '&:last-child': { pb: 2 } }}>
+        <Box
+          sx={{
+            width: 48,
+            height: 48,
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            bgcolor: card.bgColor,
+            color: card.iconColor,
+            flexShrink: 0,
+          }}
+        >
+          {card.icon}
+        </Box>
+        <Box sx={{ minWidth: 0 }}>
+          <Typography sx={{ fontSize: '0.75rem', fontWeight: 600, color: '#45464d', lineHeight: 1.4 }}>
+            {card.label}
+          </Typography>
+          <Typography sx={{ fontSize: '1.5rem', fontWeight: 600, color: '#191c1e', mt: 0.25, lineHeight: 1.2 }}>
+            {value}
+          </Typography>
         </Box>
       </CardContent>
     </Card>
@@ -110,7 +130,17 @@ export default function DashboardPage() {
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       {sections.map((section) => (
         <Box key={section.title}>
-          <Typography variant="h6" sx={{ mb: 1.5, color: 'text.secondary', fontWeight: 600 }}>
+          <Typography
+            variant="h6"
+            sx={{
+              mb: 1.5,
+              color: '#45464d',
+              fontWeight: 600,
+              fontSize: '1rem',
+              borderBottom: '1px solid #e0e3e5',
+              pb: 0.5,
+            }}
+          >
             {section.title}
           </Typography>
           <Grid container spacing={2}>

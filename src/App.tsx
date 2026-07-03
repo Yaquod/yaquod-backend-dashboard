@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import UserListPage from './pages/UserListPage';
 import VehicleListPage from './pages/VehicleListPage';
+import VehicleLocationsPage from './pages/VehicleLocationsPage';
 import CreateVehiclePage from './pages/CreateVehiclePage';
 import EditVehiclePage from './pages/EditVehiclePage';
 import RequestsPage from './pages/RequestsPage';
@@ -45,6 +46,7 @@ export default function App() {
                 <Route index element={<DashboardPage />} />
                 <Route path="users" element={<UserListPage />} />
                 <Route path="vehicles" element={<VehicleListPage />} />
+                <Route path="vehicles/locations" element={<VehicleLocationsPage />} />
                 <Route path="vehicles/new" element={<CreateVehiclePage />} />
                 <Route path="vehicles/:id/edit" element={<EditVehiclePage />} />
                 <Route path="requests" element={<RequestsPage />} />
