@@ -41,15 +41,20 @@ export default function LoginPage() {
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh',
-        bgcolor: 'grey.100',
+        bgcolor: '#f7f9fb',
       }}
     >
-      <Card sx={{ width: 400 }}>
+      <Card sx={{ width: 400, p: 1 }}>
         <CardContent>
-          <Typography variant="h5" gutterBottom align="center">
-            Yaquod Admin
-          </Typography>
-          {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+          <Box sx={{ textAlign: 'center', mb: 3 }}>
+            <Typography variant="h5" sx={{ fontWeight: 900, letterSpacing: '-0.02em', color: '#191c1e' }}>
+              Yaquod Admin
+            </Typography>
+            <Typography sx={{ fontSize: '0.75rem', color: '#45464d', mt: 0.25, fontWeight: 600 }}>
+              Management Console
+            </Typography>
+          </Box>
+          {error && <Alert severity="error" sx={{ mb: 2, fontSize: '0.875rem' }}>{error}</Alert>}
           <Box component="form" onSubmit={handleSubmit}>
             <TextField
               fullWidth
@@ -75,9 +80,9 @@ export default function LoginPage() {
               variant="contained"
               size="large"
               disabled={loading}
-              sx={{ mt: 2 }}
+              sx={{ mt: 3, py: 1.25, bgcolor: '#0051d5', '&:hover': { bgcolor: '#003ea8' } }}
             >
-              {loading ? <CircularProgress size={24} /> : 'Sign In'}
+              {loading ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : 'Sign In'}
             </Button>
           </Box>
         </CardContent>

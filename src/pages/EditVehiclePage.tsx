@@ -39,7 +39,12 @@ export default function EditVehiclePage() {
 
   return (
     <Box>
-      <Typography variant="h5" sx={{ mb: 2 }}>Edit Vehicle</Typography>
+      <Box sx={{ mb: 2 }}>
+        <Typography variant="h5" sx={{ fontSize: '1.25rem' }}>Edit Vehicle</Typography>
+        <Typography sx={{ fontSize: '0.875rem', color: '#45464d', mt: 0.25 }}>
+          Update vehicle information.
+        </Typography>
+      </Box>
       <VehicleForm
         defaultValues={defaultValues}
         onSubmit={handleSubmit}

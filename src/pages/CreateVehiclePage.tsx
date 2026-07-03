@@ -15,7 +15,12 @@ export default function CreateVehiclePage() {
 
   return (
     <Box>
-      <Typography variant="h5" sx={{ mb: 2 }}>Add Vehicle</Typography>
+      <Box sx={{ mb: 2 }}>
+        <Typography variant="h5" sx={{ fontSize: '1.25rem' }}>Add Vehicle</Typography>
+        <Typography sx={{ fontSize: '0.875rem', color: '#45464d', mt: 0.25 }}>
+          Register a new vehicle in the fleet.
+        </Typography>
+      </Box>
       <VehicleForm
         onSubmit={handleSubmit}
         loading={mutation.isPending}
