@@ -226,6 +226,7 @@ export default function RequestsPage() {
             variant="outlined"
             size="small"
             startIcon={<FilterListIcon />}
+            disabled
             sx={{
               borderColor: '#c6c6cd',
               color: '#191c1e',
@@ -240,6 +241,7 @@ export default function RequestsPage() {
             variant="contained"
             size="small"
             startIcon={<AddIcon />}
+            disabled
             sx={{
               bgcolor: '#0051d5',
               fontSize: '0.75rem',
@@ -300,6 +302,7 @@ export default function RequestsPage() {
         <DataGrid
           rows={requests || []}
           columns={columns}
+          loading={!requests}
           pageSizeOptions={[10, 25, 50]}
           initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
           disableRowSelectionOnClick

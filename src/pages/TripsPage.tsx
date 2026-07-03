@@ -266,6 +266,7 @@ export default function TripsPage() {
             variant="outlined"
             size="small"
             startIcon={<FilterListIcon />}
+            disabled
             sx={{
               borderColor: '#c6c6cd',
               color: '#191c1e',
@@ -280,6 +281,7 @@ export default function TripsPage() {
             variant="contained"
             size="small"
             startIcon={<DownloadIcon />}
+            disabled
             sx={{
               bgcolor: '#0051d5',
               fontSize: '0.75rem',
@@ -343,6 +345,7 @@ export default function TripsPage() {
         <DataGrid
           rows={trips || []}
           columns={columns}
+          loading={!trips}
           pageSizeOptions={[10, 25, 50]}
           initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
           disableRowSelectionOnClick

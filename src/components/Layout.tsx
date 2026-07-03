@@ -39,7 +39,7 @@ const navItems = [
 
 function isActive(path: string, current: string) {
   if (path === '/') return current === '/';
-  if (path === '/vehicles') return current === '/vehicles' || current.startsWith('/vehicles/') && !current.includes('/locations') && !current.includes('/new') && !current.includes('/edit');
+  if (path === '/vehicles') return current === '/vehicles' || (current.startsWith('/vehicles/') && !current.includes('/locations'));
   if (path === '/vehicles/locations') return current.startsWith('/vehicles/locations');
   return current.startsWith(path);
 }

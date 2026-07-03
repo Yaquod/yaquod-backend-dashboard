@@ -41,15 +41,22 @@ function hasLocation(v: Vehicle): boolean {
   );
 }
 
+const markerIconCache: Partial<Record<VehicleStatus, L.DivIcon>> = {};
+
 function markerIcon(status: VehicleStatus): L.DivIcon {
+  const cached = markerIconCache[status];
+  if (cached) return cached;
   const color = statusHexColors[status];
-  return L.divIcon({
+  const icon = L.divIcon({
     className: 'vehicle-marker',
     html: `<span style="display:block;width:18px;height:18px;border-radius:50%;background:${color};border:2px solid #fff;box-shadow:0 0 4px rgba(0,0,0,0.4);"></span>`,
     iconSize: [18, 18],
     iconAnchor: [9, 9],
     popupAnchor: [0, -9],
   });
+
+  markerIconCache[status] = icon;
+  return icon;
 }
 
 function ZoomControls() {
@@ -109,6 +116,8 @@ function ZoomControls() {
       </IconButton>
       <IconButton
         size="small"
+         aria-label="Map layers"
+         disabled
         sx={{
           bgcolor: '#ffffff',
           borderRadius: 1,

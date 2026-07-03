@@ -8,13 +8,10 @@ import {
   TextField,
   Select,
   MenuItem,
-  IconButton,
 } from '@mui/material';
 import { DataGrid, type GridColDef, type GridRowSelectionModel } from '@mui/x-data-grid';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ElectricCarIcon from '@mui/icons-material/ElectricCar';
 import AirportShuttleIcon from '@mui/icons-material/AirportShuttle';
@@ -224,11 +221,6 @@ export default function VehicleListPage() {
         headerName: '',
         width: 80,
         sortable: false,
-        renderCell: () => (
-          <IconButton size="small" sx={{ color: '#45464d', '&:hover': { color: '#0051d5' } }}>
-            <MoreVertIcon fontSize="small" />
-          </IconButton>
-        ),
       },
     ],
     [updateStatus]
@@ -334,14 +326,6 @@ export default function VehicleListPage() {
             sx={{ fontSize: '0.75rem', fontWeight: 600 }}
           >
             Delete
-          </Button>
-          <Button
-            size="small"
-            startIcon={<EditIcon />}
-            sx={{ fontSize: '0.75rem', fontWeight: 600, color: '#0051d5', borderColor: '#c6c6cd' }}
-            variant="outlined"
-          >
-            Edit
           </Button>
         </Box>
       )}
