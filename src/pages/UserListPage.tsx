@@ -8,10 +8,8 @@ import {
   Select,
   MenuItem,
   Switch,
-  IconButton,
 } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PersonIcon from '@mui/icons-material/Person';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
@@ -48,14 +46,14 @@ export default function UserListPage() {
   const updateVerified = useUpdateUserVerified();
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 80 },
-    { field: 'firstName', headerName: 'First Name', width: 140 },
-    { field: 'lastName', headerName: 'Last Name', width: 140 },
-    { field: 'email', headerName: 'Email', width: 250 },
+    { field: 'id', headerName: 'ID', flex: 0.5 },
+    { field: 'firstName', headerName: 'First Name', flex: 1 },
+    { field: 'lastName', headerName: 'Last Name', flex: 1 },
+    { field: 'email', headerName: 'Email', flex: 2 },
     {
       field: 'phoneNumber',
       headerName: 'Phone',
-      width: 150,
+      flex: 1,
       renderCell: (params) => (
         <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
           {params.value || '-'}
@@ -65,7 +63,7 @@ export default function UserListPage() {
     {
       field: 'role',
       headerName: 'Role',
-      width: 160,
+      flex: 1,
       renderCell: (params) => {
         const isSelf = params.id === currentUser?.id;
         const config = roleConfig[params.value as string];
@@ -108,7 +106,7 @@ export default function UserListPage() {
     {
       field: 'emailVerified',
       headerName: 'Verified',
-      width: 110,
+      flex: 0.5,
       renderCell: (params) => {
         const isSelf = params.id === currentUser?.id;
         return (
@@ -130,17 +128,6 @@ export default function UserListPage() {
           </Box>
         );
       },
-    },
-    {
-      field: 'actions',
-      headerName: '',
-      width: 80,
-      sortable: false,
-      renderCell: () => (
-        <IconButton size="small" sx={{ color: '#45464d', '&:hover': { color: '#0051d5' } }}>
-          <MoreVertIcon fontSize="small" />
-        </IconButton>
-      ),
     },
   ];
 

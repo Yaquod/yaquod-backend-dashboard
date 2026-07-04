@@ -76,7 +76,7 @@ export default function VehicleListPage() {
       {
         field: 'id',
         headerName: 'ID',
-        width: 80,
+        flex: 0.5,
         renderCell: (params) => (
           <Typography
             sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.8125rem', color: '#45464d' }}
@@ -88,18 +88,18 @@ export default function VehicleListPage() {
       {
         field: 'vinNumber',
         headerName: 'VIN',
-        width: 180,
+        flex: 1.5,
         renderCell: (params) => (
           <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
             {params.value}
           </Typography>
         ),
       },
-      { field: 'plateNo', headerName: 'Plate No.', width: 130 },
+      { field: 'plateNo', headerName: 'Plate No.', flex: 1 },
       {
         field: 'carCompany',
         headerName: 'Make / Model',
-        width: 200,
+        flex: 2,
         renderCell: (params) => {
           const row = params.row;
           return (
@@ -131,7 +131,7 @@ export default function VehicleListPage() {
       {
         field: 'color',
         headerName: 'Color',
-        width: 110,
+        flex: 0.5,
         renderCell: (params) => (
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
             <Box
@@ -148,11 +148,11 @@ export default function VehicleListPage() {
           </Box>
         ),
       },
-      { field: 'seats', headerName: 'Seats', width: 80, type: 'number', align: 'center', headerAlign: 'center' },
+      { field: 'seats', headerName: 'Seats', flex: 0.5, type: 'number', align: 'center', headerAlign: 'center' },
       {
         field: 'status',
         headerName: 'Status',
-        width: 180,
+        flex: 1.5,
         renderCell: (params) => {
           const status = params.value as VehicleStatus;
           return (
@@ -207,7 +207,7 @@ export default function VehicleListPage() {
       {
         field: 'createdAt',
         headerName: 'Created',
-        width: 180,
+        flex: 1,
         type: 'dateTime',
         valueGetter: (value: string) => (value ? new Date(value) : null),
         renderCell: (params) => (
@@ -263,6 +263,7 @@ export default function VehicleListPage() {
             variant="outlined"
             size="small"
             startIcon={<FilterListIcon />}
+            disabled
             sx={{
               borderColor: '#c6c6cd',
               color: '#191c1e',

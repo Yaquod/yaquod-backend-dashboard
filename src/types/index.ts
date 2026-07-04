@@ -114,6 +114,13 @@ export interface DashboardDto {
   totalRevenue: number;
 }
 
+export interface CreateRequestDto {
+  startLong: number;
+  startLat: number;
+  endLong: number;
+  endLat: number;
+}
+
 export interface CreateVehicleDto {
   vinNumber: string;
   plateNo: string;
