@@ -104,6 +104,26 @@ export default function UserListPage() {
       },
     },
     {
+      field: 'dob',
+      headerName: 'DOB',
+      flex: 0.8,
+      renderCell: (params) => (
+        <Typography sx={{ fontSize: '0.75rem', color: '#45464d' }}>
+          {params.value ? new Date(params.value).toLocaleDateString() : '-'}
+        </Typography>
+      ),
+    },
+    {
+      field: 'join_date',
+      headerName: 'Joined',
+      flex: 0.8,
+      renderCell: (params) => (
+        <Typography sx={{ fontSize: '0.75rem', color: '#45464d' }}>
+          {new Date(params.value).toLocaleDateString()}
+        </Typography>
+      ),
+    },
+    {
       field: 'emailVerified',
       headerName: 'Verified',
       flex: 0.5,

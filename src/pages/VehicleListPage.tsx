@@ -217,6 +217,66 @@ export default function VehicleListPage() {
         ),
       },
       {
+        field: 'lastUpdatedStatusAt',
+        headerName: 'Status Updated',
+        flex: 1,
+        type: 'dateTime',
+        valueGetter: (value: string) => (value ? new Date(value) : null),
+        renderCell: (params) => (
+          <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
+            {params.value ? new Date(params.value).toLocaleDateString() : '-'}
+          </Typography>
+        ),
+      },
+      {
+        field: 'lastUpdatedLocationAt',
+        headerName: 'Location Updated',
+        flex: 1,
+        type: 'dateTime',
+        valueGetter: (value: string) => (value ? new Date(value) : null),
+        renderCell: (params) => (
+          <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
+            {params.value ? new Date(params.value).toLocaleDateString() : '-'}
+          </Typography>
+        ),
+      },
+      {
+        field: 'lastUpdatedLat',
+        headerName: 'Coords',
+        flex: 1,
+        renderCell: (params) => {
+          const lat = params.value;
+          const lng = params.row.lastUpdatedLong;
+          return (
+            <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
+              {lat != null && lng != null ? `${lat.toFixed(4)}, ${lng.toFixed(4)}` : '-'}
+            </Typography>
+          );
+        },
+      },
+      {
+        field: 'lastAuthenticatedAt',
+        headerName: 'Last Auth',
+        flex: 1,
+        type: 'dateTime',
+        valueGetter: (value: string) => (value ? new Date(value) : null),
+        renderCell: (params) => (
+          <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
+            {params.value ? new Date(params.value).toLocaleDateString() : '-'}
+          </Typography>
+        ),
+      },
+      {
+        field: 'createdByAdminId',
+        headerName: 'Created By',
+        flex: 0.5,
+        renderCell: (params) => (
+          <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#0051d5' }}>
+            {params.value != null ? `A-${params.value}` : '-'}
+          </Typography>
+        ),
+      },
+      {
         field: 'actions',
         headerName: '',
         width: 80,

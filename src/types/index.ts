@@ -26,6 +26,8 @@ export interface Vehicle {
   lastUpdatedLat?: number;
   apiKey: string;
   createdAt: string;
+  lastAuthenticatedAt?: string;
+  createdByAdminId?: number;
 }
 
 export type VehicleStatus =
