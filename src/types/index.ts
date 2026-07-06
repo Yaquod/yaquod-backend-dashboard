@@ -53,6 +53,13 @@ export interface Request {
   createdAt: string;
   estimatedTime: number;
   estimatedFare: number;
+  pickupLong?: number;
+  pickupLat?: number;
+  destinationLong?: number;
+  destinationLat?: number;
+  userId?: number;
+  tripId?: number;
+  vehicleId?: number;
 }
 
 export type RequestStatus =
