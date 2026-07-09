@@ -5,10 +5,8 @@ import {
   Button,
   Card,
   CardContent,
-  IconButton,
 } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useTrips } from '../hooks/useTrips';
@@ -151,7 +149,7 @@ export default function TripsPage() {
     {
       field: 'id',
       headerName: 'Trip ID',
-      width: 120,
+      flex: 1,
       renderCell: (params) => {
         const isAnomaly = anomalyStatuses.includes(params.row.status as TripStatus);
         return (
@@ -183,13 +181,13 @@ export default function TripsPage() {
     {
       field: 'status',
       headerName: 'Status',
-      width: 200,
+      flex: 2,
       renderCell: (params) => <StatusBadge status={params.value} />,
     },
     {
       field: 'startedAt',
       headerName: 'Started',
-      width: 180,
+      flex: 1,
       type: 'dateTime',
       valueGetter: (value: string) => (value ? new Date(value) : null),
       renderCell: (params) => (
@@ -201,7 +199,7 @@ export default function TripsPage() {
     {
       field: 'updatedAt',
       headerName: 'Updated',
-      width: 180,
+      flex: 1,
       type: 'dateTime',
       valueGetter: (value: string) => (value ? new Date(value) : null),
       renderCell: (params) => (
@@ -213,7 +211,7 @@ export default function TripsPage() {
     {
       field: 'endedAt',
       headerName: 'Ended',
-      width: 180,
+      flex: 1,
       type: 'dateTime',
       valueGetter: (value: string) => (value ? new Date(value) : null),
       renderCell: (params) => (
@@ -226,17 +224,6 @@ export default function TripsPage() {
         >
           {params.value ? new Date(params.value).toLocaleTimeString() : '--'}
         </Typography>
-      ),
-    },
-    {
-      field: 'actions',
-      headerName: '',
-      width: 80,
-      sortable: false,
-      renderCell: () => (
-        <IconButton size="small" sx={{ color: '#45464d', '&:hover': { color: '#0051d5' } }}>
-          <MoreVertIcon fontSize="small" />
-        </IconButton>
       ),
     },
   ];

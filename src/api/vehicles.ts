@@ -2,7 +2,7 @@ import apiClient from './client';
 import type { ApiResponse, Vehicle, CreateVehicleDto, Trip } from '../types';
 
 export async function getVehicles() {
-  const res = await apiClient.get<ApiResponse<Vehicle[]>>('/api/vehicles');
+  const res = await apiClient.get<ApiResponse<Vehicle[]>>('/api/admins/vehicles');
   return res.data.data;
 }
 

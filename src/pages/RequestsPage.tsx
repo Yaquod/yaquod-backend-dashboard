@@ -1,21 +1,25 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Box,
   Typography,
   Button,
   Card,
   CardContent,
-  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Alert,
 } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import AddIcon from '@mui/icons-material/Add';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useRequests } from '../hooks/useRequests';
+import { useRequests, useCreateRequest } from '../hooks/useRequests';
 import type { RequestStatus } from '../types';
 
 const statusDotColors: Record<RequestStatus, string> = {
@@ -118,6 +122,34 @@ function MetricCard({
 
 export default function RequestsPage() {
   const { data: requests } = useRequests();
+  const createMutation = useCreateRequest();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [form, setForm] = useState<Record<string, string>>({
+    startLong: '',
+    startLat: '',
+    endLong: '',
+    endLat: '',
+  });
+
+  const handleCreate = async () => {
+    const startLong = parseFloat(form.startLong);
+    const startLat = parseFloat(form.startLat);
+    const endLong = parseFloat(form.endLong);
+    const endLat = parseFloat(form.endLat);
+    if (
+      isNaN(startLong) || isNaN(startLat) || isNaN(endLong) || isNaN(endLat) ||
+      startLong < -180 || startLong > 180 ||
+      startLat < -90 || startLat > 90 ||
+      endLong < -180 || endLong > 180 ||
+      endLat < -90 || endLat > 90
+    ) {
+      setDialogOpen(false);
+      return;
+    }
+    await createMutation.mutateAsync({ startLong, startLat, endLong, endLat });
+    setDialogOpen(false);
+    setForm({ startLong: '', startLat: '', endLong: '', endLat: '' });
+  };
 
   const metrics = useMemo(() => {
     if (!requests) return { pending: 0, accepted: 0, completed: 0, failed: 0 };
@@ -133,7 +165,7 @@ export default function RequestsPage() {
     {
       field: 'id',
       headerName: 'ID',
-      width: 110,
+      flex: 1,
       renderCell: (params) => (
         <Typography
           sx={{
@@ -150,13 +182,13 @@ export default function RequestsPage() {
     {
       field: 'status',
       headerName: 'Status',
-      width: 150,
+      flex: 1.5,
       renderCell: (params) => <StatusBadge status={params.value} />,
     },
     {
       field: 'estimatedTime',
       headerName: 'Est. Time',
-      width: 110,
+      flex: 1,
       type: 'number',
       valueFormatter: (value: number) => `${value?.toFixed(0) ?? '-'} min`,
       renderCell: (params) => (
@@ -168,7 +200,7 @@ export default function RequestsPage() {
     {
       field: 'estimatedFare',
       headerName: 'Est. Fare (EGP)',
-      width: 140,
+      flex: 1.5,
       type: 'number',
       renderCell: (params) => (
         <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.8125rem' }}>
@@ -179,7 +211,7 @@ export default function RequestsPage() {
     {
       field: 'createdAt',
       headerName: 'Created',
-      width: 180,
+      flex: 1.5,
       type: 'dateTime',
       valueGetter: (value: string) => (value ? new Date(value) : null),
       renderCell: (params) => (
@@ -189,14 +221,61 @@ export default function RequestsPage() {
       ),
     },
     {
-      field: 'actions',
-      headerName: '',
-      width: 80,
-      sortable: false,
-      renderCell: () => (
-        <IconButton size="small" sx={{ color: '#45464d', '&:hover': { color: '#0051d5' } }}>
-          <MoreVertIcon fontSize="small" />
-        </IconButton>
+      field: 'pickupLat',
+      headerName: 'Pickup',
+      flex: 1,
+      renderCell: (params) => {
+        const lat = params.value;
+        const lng = params.row.pickupLong;
+        return (
+          <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
+            {lat != null && lng != null ? `${lat.toFixed(4)}, ${lng.toFixed(4)}` : '-'}
+          </Typography>
+        );
+      },
+    },
+    {
+      field: 'destinationLat',
+      headerName: 'Destination',
+      flex: 1,
+      renderCell: (params) => {
+        const lat = params.value;
+        const lng = params.row.destinationLong;
+        return (
+          <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
+            {lat != null && lng != null ? `${lat.toFixed(4)}, ${lng.toFixed(4)}` : '-'}
+          </Typography>
+        );
+      },
+    },
+    {
+      field: 'userId',
+      headerName: 'User ID',
+      flex: 0.8,
+      renderCell: (params) => (
+        <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#0051d5' }}>
+          {params.value != null ? `U-${params.value}` : '-'}
+        </Typography>
+      ),
+    },
+    {
+      field: 'tripId',
+      headerName: 'Trip ID',
+      flex: 0.8,
+      renderCell: (params) => (
+        <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#0051d5' }}>
+          {params.value != null ? `TRP-${String(params.value).padStart(4, '0')}` : '-'}
+        </Typography>
+      ),
+    },
+    {
+      field: 'vehicleId',
+      headerName: 'Vehicle ID',
+      flex: 0.8,
+      renderCell: (params) => (
+        <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#0051d5' }}>
+          {params.value != null ? `V-${params.value}` : '-'}
+        </Typography>
       ),
     },
   ];
@@ -241,7 +320,7 @@ export default function RequestsPage() {
             variant="contained"
             size="small"
             startIcon={<AddIcon />}
-            disabled
+            onClick={() => setDialogOpen(true)}
             sx={{
               bgcolor: '#0051d5',
               fontSize: '0.75rem',
@@ -308,6 +387,63 @@ export default function RequestsPage() {
           disableRowSelectionOnClick
         />
       </Box>
+
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>New Ride Request</DialogTitle>
+        <DialogContent>
+          {createMutation.isError && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {createMutation.error?.message}
+            </Alert>
+          )}
+          <TextField
+            fullWidth
+            label="Start Longitude"
+            type="number"
+            margin="normal"
+            value={form.startLong}
+            onChange={(e) => setForm({ ...form, startLong: e.target.value })}
+            slotProps={{ htmlInput: { step: 0.01, placeholder: 'e.g. 31.2357' } }}
+          />
+          <TextField
+            fullWidth
+            label="Start Latitude"
+            type="number"
+            margin="normal"
+            value={form.startLat}
+            onChange={(e) => setForm({ ...form, startLat: e.target.value })}
+            slotProps={{ htmlInput: { step: 0.01, placeholder: 'e.g. 30.0444' } }}
+          />
+          <TextField
+            fullWidth
+            label="End Longitude"
+            type="number"
+            margin="normal"
+            value={form.endLong}
+            onChange={(e) => setForm({ ...form, endLong: e.target.value })}
+            slotProps={{ htmlInput: { step: 0.01, placeholder: 'e.g. 31.2357' } }}
+          />
+          <TextField
+            fullWidth
+            label="End Latitude"
+            type="number"
+            margin="normal"
+            value={form.endLat}
+            onChange={(e) => setForm({ ...form, endLat: e.target.value })}
+            slotProps={{ htmlInput: { step: 0.01, placeholder: 'e.g. 30.0444' } }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
+          <Button
+            variant="contained"
+            onClick={handleCreate}
+            disabled={createMutation.isPending}
+          >
+            {createMutation.isPending ? 'Creating...' : 'Create'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

@@ -5,10 +5,8 @@ import {
   Button,
   Card,
   CardContent,
-  IconButton,
 } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import DownloadIcon from '@mui/icons-material/Download';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -129,7 +127,8 @@ export default function PaymentsPage() {
     {
       field: 'id',
       headerName: 'ID',
-      width: 110,
+      flex: 0.5,
+      minWidth: 90,
       renderCell: (params) => (
         <Typography
           sx={{
@@ -145,7 +144,8 @@ export default function PaymentsPage() {
     {
       field: 'amount',
       headerName: 'Amount',
-      width: 130,
+      flex: 0.7,
+      minWidth: 100,
       type: 'number',
       renderCell: (params) => (
         <Typography sx={{ fontSize: '0.875rem', fontWeight: 600 }}>
@@ -155,17 +155,19 @@ export default function PaymentsPage() {
         </Typography>
       ),
     },
-    { field: 'currency', headerName: 'Currency', width: 90 },
+    { field: 'currency', headerName: 'Currency', flex: 0.5, minWidth: 80 },
     {
       field: 'status',
       headerName: 'Status',
-      width: 150,
+      flex: 0.8,
+      minWidth: 110,
       renderCell: (params) => <StatusBadge status={params.value} />,
     },
     {
       field: 'paymobOrderId',
       headerName: 'Order ID',
-      width: 160,
+      flex: 1.2,
+      minWidth: 140,
       renderCell: (params) => (
         <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
           {params.value || '-'}
@@ -175,19 +177,27 @@ export default function PaymentsPage() {
     {
       field: 'paymobTransactionId',
       headerName: 'Transaction ID',
-      width: 160,
+      flex: 1.5,
+      minWidth: 160,
       renderCell: (params) => (
-        <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
-          {params.value
-            ? `${params.value.slice(0, 7)}...`
-            : '-'}
+        <Typography
+          sx={{
+            fontFamily: '"JetBrains Mono", monospace',
+            fontSize: '0.75rem',
+            color: '#45464d',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {params.value || '-'}
         </Typography>
       ),
     },
     {
       field: 'createdAt',
       headerName: 'Created At',
-      width: 180,
+      flex: 1,
+      minWidth: 150,
       type: 'dateTime',
       valueGetter: (value: string) => (value ? new Date(value) : null),
       renderCell: (params) => (
@@ -199,24 +209,14 @@ export default function PaymentsPage() {
     {
       field: 'paidAt',
       headerName: 'Paid At',
-      width: 180,
+      flex: 1,
+      minWidth: 150,
       type: 'dateTime',
       valueGetter: (value: string) => (value ? new Date(value) : null),
       renderCell: (params) => (
         <Typography sx={{ fontSize: '0.8125rem', color: params.value ? '#191c1e' : '#76777d' }}>
           {params.value ? new Date(params.value).toLocaleString() : '-'}
         </Typography>
-      ),
-    },
-    {
-      field: 'actions',
-      headerName: '',
-      width: 80,
-      sortable: false,
-      renderCell: () => (
-        <IconButton size="small" sx={{ color: '#45464d', '&:hover': { color: '#0051d5' } }}>
-          <MoreVertIcon fontSize="small" />
-        </IconButton>
       ),
     },
   ];

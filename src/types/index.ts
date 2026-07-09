@@ -26,6 +26,8 @@ export interface Vehicle {
   lastUpdatedLat?: number;
   apiKey: string;
   createdAt: string;
+  lastAuthenticatedAt?: string;
+  createdByAdminId?: number;
 }
 
 export type VehicleStatus =
@@ -51,6 +53,13 @@ export interface Request {
   createdAt: string;
   estimatedTime: number;
   estimatedFare: number;
+  pickupLong?: number;
+  pickupLat?: number;
+  destinationLong?: number;
+  destinationLat?: number;
+  userId?: number;
+  tripId?: number;
+  vehicleId?: number;
 }
 
 export type RequestStatus =
@@ -112,6 +121,13 @@ export interface DashboardDto {
   failedRequests: number;
   totalPayments: number;
   totalRevenue: number;
+}
+
+export interface CreateRequestDto {
+  startLong: number;
+  startLat: number;
+  endLong: number;
+  endLat: number;
 }
 
 export interface CreateVehicleDto {
