@@ -20,6 +20,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import TripOriginIcon from '@mui/icons-material/TripOrigin';
 import PaymentIcon from '@mui/icons-material/Payment';
+import StarIcon from '@mui/icons-material/Star';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useState } from 'react';
@@ -33,6 +34,7 @@ const navItems = [
   { label: 'Vehicles', path: '/vehicles', icon: <DirectionsCarIcon /> },
   { label: 'Live Map', path: '/vehicles/locations', icon: <MapIcon /> },
   { label: 'Requests', path: '/requests', icon: <ReceiptIcon /> },
+  { label: 'Ratings', path: '/ratings', icon: <StarIcon /> },
   { label: 'Trips', path: '/trips', icon: <TripOriginIcon /> },
   { label: 'Payments', path: '/payments', icon: <PaymentIcon /> },
 ];

@@ -16,6 +16,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import StarIcon from '@mui/icons-material/Star';
 import { useDashboard } from '../hooks/useDashboard';
 import type { DashboardDto } from '../types';
 
@@ -74,6 +75,13 @@ const sections: Section[] = [
     title: 'Revenue',
     cards: [
       { label: 'Revenue (EGP)', field: 'totalRevenue', icon: <AttachMoneyIcon />, bgColor: 'rgba(123, 31, 162, 0.1)', iconColor: '#7b1fa2' },
+    ],
+  },
+  {
+    title: 'Ratings',
+    cards: [
+      { label: 'Total Ratings', field: 'totalRatings', icon: <StarIcon />, bgColor: 'rgba(245, 158, 11, 0.1)', iconColor: '#f59e0b' },
+      { label: 'Average Rating', field: 'avgRating', icon: <StarIcon />, bgColor: 'rgba(245, 158, 11, 0.1)', iconColor: '#f59e0b' },
     ],
   },
 ];
@@ -149,7 +157,9 @@ export default function DashboardPage() {
               const value =
                 card.field === 'totalRevenue'
                   ? (raw as number)?.toLocaleString('en-US', { minimumFractionDigits: 2 }) ?? '0.00'
-                  : (raw as number)?.toLocaleString() ?? '0';
+                  : card.field === 'avgRating'
+                    ? (raw as number)?.toFixed(1) ?? '0.0'
+                    : (raw as number)?.toLocaleString() ?? '0';
               return (
                 <Grid key={card.field} size={{ xs: 12, sm: 6, md: 3 }}>
                   <KpiCard card={card} value={value} />

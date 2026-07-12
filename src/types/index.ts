@@ -130,6 +130,8 @@ export interface DashboardDto {
   failedRequests: number;
   totalPayments: number;
   totalRevenue: number;
+  totalRatings: number;
+  avgRating: number;
 }
 
 export interface CreateRequestDto {
@@ -146,6 +148,15 @@ export interface CreateVehicleDto {
   carCompany: string;
   model: string;
   seats: number;
+}
+
+export interface Rating {
+  id: number;
+  ratingValue: number;
+  comment?: string;
+  userId?: number;
+  tripId?: number;
+  vehicleId?: number;
 }
 
 export interface ApiResponse<T> {
