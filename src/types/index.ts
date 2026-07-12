@@ -45,6 +45,13 @@ export interface Trip {
   startedAt?: string;
   endedAt?: string;
   updatedAt?: string;
+  userId?: number;
+  vehicleId?: number;
+  paymentId?: number;
+  pickupLong?: number;
+  pickupLat?: number;
+  destinationLong?: number;
+  destinationLat?: number;
 }
 
 export interface Request {
