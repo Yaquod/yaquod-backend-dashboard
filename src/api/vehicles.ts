@@ -27,7 +27,7 @@ export async function deleteVehicle(id: number) {
 }
 
 export async function getAllTrips() {
-  const res = await apiClient.get<ApiResponse<Trip[]>>('/api/trips');
+  const res = await apiClient.get<ApiResponse<Trip[]>>('/api/admins/trips');
   return res.data.data;
 }
 

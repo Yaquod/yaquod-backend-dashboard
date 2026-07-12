@@ -226,6 +226,64 @@ export default function TripsPage() {
         </Typography>
       ),
     },
+    {
+      field: 'pickupLat',
+      headerName: 'Pickup',
+      flex: 1,
+      renderCell: (params) => {
+        const lat = params.value;
+        const lng = params.row.pickupLong;
+        return (
+          <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
+            {lat != null && lng != null ? `${lat.toFixed(4)}, ${lng.toFixed(4)}` : '-'}
+          </Typography>
+        );
+      },
+    },
+    {
+      field: 'destinationLat',
+      headerName: 'Destination',
+      flex: 1,
+      renderCell: (params) => {
+        const lat = params.value;
+        const lng = params.row.destinationLong;
+        return (
+          <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#45464d' }}>
+            {lat != null && lng != null ? `${lat.toFixed(4)}, ${lng.toFixed(4)}` : '-'}
+          </Typography>
+        );
+      },
+    },
+    {
+      field: 'userId',
+      headerName: 'User ID',
+      flex: 0.8,
+      renderCell: (params) => (
+        <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#0051d5' }}>
+          {params.value != null ? `U-${params.value}` : '-'}
+        </Typography>
+      ),
+    },
+    {
+      field: 'vehicleId',
+      headerName: 'Vehicle ID',
+      flex: 0.8,
+      renderCell: (params) => (
+        <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#0051d5' }}>
+          {params.value != null ? `V-${params.value}` : '-'}
+        </Typography>
+      ),
+    },
+    {
+      field: 'paymentId',
+      headerName: 'Payment ID',
+      flex: 0.8,
+      renderCell: (params) => (
+        <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#0051d5' }}>
+          {params.value != null ? `PAY-${params.value}` : '-'}
+        </Typography>
+      ),
+    },
   ];
 
   return (

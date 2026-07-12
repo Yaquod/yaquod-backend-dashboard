@@ -45,6 +45,13 @@ export interface Trip {
   startedAt?: string;
   endedAt?: string;
   updatedAt?: string;
+  userId?: number;
+  vehicleId?: number;
+  paymentId?: number;
+  pickupLong?: number;
+  pickupLat?: number;
+  destinationLong?: number;
+  destinationLat?: number;
 }
 
 export interface Request {
@@ -80,6 +87,8 @@ export interface Payment {
   paymobTransactionId?: string;
   createdAt: string;
   paidAt?: string;
+  userId?: number;
+  tripId?: number;
 }
 
 export type PaymentStatus = 'PENDING' | 'PROCESSING' | 'PAID' | 'FAILED' | 'REFUNDED';
@@ -121,6 +130,8 @@ export interface DashboardDto {
   failedRequests: number;
   totalPayments: number;
   totalRevenue: number;
+  totalRatings: number;
+  avgRating: number;
 }
 
 export interface CreateRequestDto {
@@ -137,6 +148,15 @@ export interface CreateVehicleDto {
   carCompany: string;
   model: string;
   seats: number;
+}
+
+export interface Rating {
+  id: number;
+  ratingValue: number;
+  comment?: string;
+  userId?: number;
+  tripId?: number;
+  vehicleId?: number;
 }
 
 export interface ApiResponse<T> {

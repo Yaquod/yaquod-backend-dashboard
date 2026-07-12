@@ -13,6 +13,7 @@ import VehicleLocationsPage from './pages/VehicleLocationsPage';
 import CreateVehiclePage from './pages/CreateVehiclePage';
 import EditVehiclePage from './pages/EditVehiclePage';
 import RequestsPage from './pages/RequestsPage';
+import RatingsPage from './pages/RatingsPage';
 import TripsPage from './pages/TripsPage';
 import PaymentsPage from './pages/PaymentsPage';
 import theme from './theme';
@@ -50,6 +51,7 @@ export default function App() {
                 <Route path="vehicles/new" element={<CreateVehiclePage />} />
                 <Route path="vehicles/:id/edit" element={<EditVehiclePage />} />
                 <Route path="requests" element={<RequestsPage />} />
+                <Route path="ratings" element={<RatingsPage />} />
                 <Route path="trips" element={<TripsPage />} />
                 <Route path="payments" element={<PaymentsPage />} />
               </Route>
