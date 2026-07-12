@@ -87,6 +87,8 @@ export interface Payment {
   paymobTransactionId?: string;
   createdAt: string;
   paidAt?: string;
+  userId?: number;
+  tripId?: number;
 }
 
 export type PaymentStatus = 'PENDING' | 'PROCESSING' | 'PAID' | 'FAILED' | 'REFUNDED';

@@ -219,6 +219,28 @@ export default function PaymentsPage() {
         </Typography>
       ),
     },
+    {
+      field: 'userId',
+      headerName: 'User ID',
+      flex: 0.7,
+      minWidth: 100,
+      renderCell: (params) => (
+        <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#0051d5' }}>
+          {params.value != null ? `U-${params.value}` : '-'}
+        </Typography>
+      ),
+    },
+    {
+      field: 'tripId',
+      headerName: 'Trip ID',
+      flex: 0.7,
+      minWidth: 100,
+      renderCell: (params) => (
+        <Typography sx={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', color: '#0051d5' }}>
+          {params.value != null ? `TRP-${String(params.value).padStart(4, '0')}` : '-'}
+        </Typography>
+      ),
+    },
   ];
 
   return (
